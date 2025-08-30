@@ -37,6 +37,45 @@ def load_available_quizzes():
     
     return quizzes
 
+def shuffle_question_options(question):
+    """Shuffle answer options and update indices accordingly"""
+    import random
+    
+    if question['type'] == 'single':
+        # Create list of (option, is_correct) pairs
+        options_with_correctness = [(option, i == question['answer_index']) 
+                                   for i, option in enumerate(question['options'])]
+        
+        # Shuffle the pairs
+        random.shuffle(options_with_correctness)
+        
+        # Extract shuffled options and find new correct index
+        shuffled_options = [option for option, _ in options_with_correctness]
+        new_answer_index = next(i for i, (_, is_correct) in enumerate(options_with_correctness) if is_correct)
+        
+        # Update question
+        question['options'] = shuffled_options
+        question['answer_index'] = new_answer_index
+        
+    elif question['type'] == 'multi':
+        # Create list of (option, is_correct) pairs
+        correct_indices = set(question['answer_indices'])
+        options_with_correctness = [(option, i in correct_indices) 
+                                   for i, option in enumerate(question['options'])]
+        
+        # Shuffle the pairs
+        random.shuffle(options_with_correctness)
+        
+        # Extract shuffled options and find new correct indices
+        shuffled_options = [option for option, _ in options_with_correctness]
+        new_answer_indices = [i for i, (_, is_correct) in enumerate(options_with_correctness) if is_correct]
+        
+        # Update question
+        question['options'] = shuffled_options
+        question['answer_indices'] = new_answer_indices
+    
+    return question
+
 def initialize_session_state():
     """Initialize session state variables"""
     if 'quiz_engine' not in st.session_state:
@@ -71,7 +110,24 @@ def reset_quiz_state():
 
 def display_quiz_selection(available_quizzes):
     """Display quiz selection interface"""
-    st.title("ProcureIQ Quiz MVP")
+    st.title("ProcureIQ")
+    
+    # Intro to ProcureIQ
+    st.subheader("Intro to ProcureIQ")
+    st.write("""
+    Welcome to ProcureIQ, your interactive procurement training platform! Our case-study quizzes help you develop essential buyer competencies through real-world scenarios.
+    
+    **What you'll learn:**
+    - **Check the Facts** - Data verification and analysis skills
+    - **Break Down the Costs** - Cost analysis and financial evaluation  
+    - **Know the Market** - Market research and industry knowledge
+    - **Negotiate for Value** - Strategic negotiation techniques
+    - **Choose the Right Supplier Strategy** - Supplier selection and management
+    - **Learn and Improve** - Continuous improvement and adaptation
+    
+    Each quiz presents 10 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
+    """)
+    
     st.write("Select a case study quiz to begin your procurement training.")
     
     if not available_quizzes:
@@ -89,15 +145,6 @@ def display_quiz_selection(available_quizzes):
     if selected_title:
         selected_slug = quiz_options[selected_title]
         quiz_data = available_quizzes[selected_slug]['data']
-        
-        # Display scenario
-        st.subheader("Scenario")
-        st.write(quiz_data['scenario'])
-        
-        # Display learning objectives
-        st.subheader("Learning Objectives")
-        for objective in quiz_data['learning_objectives']:
-            st.write(f"• {objective}")
         
         if st.button("Start Quiz", type="primary"):
             st.session_state.selected_quiz = selected_slug
@@ -284,28 +331,31 @@ def display_results():
     fig = create_radar_chart(scores, quiz_engine.quiz_data['skills_catalog'], quiz_engine.selected_questions)
     st.plotly_chart(fig, use_container_width=True)
     
-    # AI-generated improvement suggestions
-    st.subheader("Improvement Suggestions")
-    with st.spinner("Generating personalized improvement suggestions..."):
-        try:
-            suggestions = st.session_state.ai_helper.get_improvement_suggestions(
-                scores, 
-                quiz_engine.quiz_data['skills_catalog'],
-                quiz_engine.quiz_data['improvement_rubric']
-            )
-            
-            for skill_key, suggestion in suggestions.items():
-                skill_label = next(
-                    (skill['label'] for skill in quiz_engine.quiz_data['skills_catalog'] 
-                     if skill['key'] == skill_key), 
-                    skill_key
+    # AI-generated improvement suggestions (only for scores 90% or below)
+    if percentage <= 90:
+        st.subheader("Improvement Suggestions")
+        with st.spinner("Generating personalized improvement suggestions..."):
+            try:
+                suggestions = st.session_state.ai_helper.get_improvement_suggestions(
+                    scores, 
+                    quiz_engine.quiz_data['skills_catalog'],
+                    quiz_engine.quiz_data['improvement_rubric']
                 )
-                st.write(f"**{skill_label}:**")
-                st.write(suggestion)
-                st.write("")
                 
-        except Exception as e:
-            st.error(f"Error generating improvement suggestions: {e}")
+                for skill_key, suggestion in suggestions.items():
+                    skill_label = next(
+                        (skill['label'] for skill in quiz_engine.quiz_data['skills_catalog'] 
+                         if skill['key'] == skill_key), 
+                        skill_key
+                    )
+                    st.write(f"**{skill_label}:**")
+                    st.write(suggestion)
+                    st.write("")
+                    
+            except Exception as e:
+                st.error(f"Error generating improvement suggestions: {e}")
+    else:
+        st.success("🌟 Excellent performance! You've demonstrated strong competency across all areas.")
     
     # Quiz completion analysis
     st.subheader("Review")

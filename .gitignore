@@ -1,0 +1,15 @@
+__pycache__/
+.venv/
+venv/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+.streamlit/secrets.toml
+*.db
+procureiq.db
+node_modules/
+dist/
+build/

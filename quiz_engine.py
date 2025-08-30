@@ -20,16 +20,61 @@ class QuizEngine:
             raise ValueError("Quiz must have at least 8 questions")
     
     def select_questions(self) -> List[Dict[str, Any]]:
-        """Select 10 questions from available pool"""
+        """Select 10 questions from available pool and shuffle their options"""
+        import random
+        
         all_questions = self.quiz_data['questions'].copy()
         deliver_count = self.quiz_data['scoring'].get('deliver_count', 10)
         
         if len(all_questions) <= deliver_count:
-            return all_questions
+            selected_questions = all_questions
+        else:
+            # For MVP, we'll keep questions in order but only take the first 10
+            # This maintains the "fixed order" requirement mentioned in the spec
+            selected_questions = all_questions[:deliver_count]
         
-        # For MVP, we'll keep questions in order but only take the first 10
-        # This maintains the "fixed order" requirement mentioned in the spec
-        return all_questions[:deliver_count]
+        # Shuffle answer options for each question to prevent patterns
+        for question in selected_questions:
+            self._shuffle_question_options(question)
+            
+        return selected_questions
+    
+    def _shuffle_question_options(self, question):
+        """Shuffle answer options and update indices accordingly"""
+        import random
+        
+        if question['type'] == 'single':
+            # Create list of (option, is_correct) pairs
+            options_with_correctness = [(option, i == question['answer_index']) 
+                                       for i, option in enumerate(question['options'])]
+            
+            # Shuffle the pairs
+            random.shuffle(options_with_correctness)
+            
+            # Extract shuffled options and find new correct index
+            shuffled_options = [option for option, _ in options_with_correctness]
+            new_answer_index = next(i for i, (_, is_correct) in enumerate(options_with_correctness) if is_correct)
+            
+            # Update question
+            question['options'] = shuffled_options
+            question['answer_index'] = new_answer_index
+            
+        elif question['type'] == 'multi':
+            # Create list of (option, is_correct) pairs
+            correct_indices = set(question['answer_indices'])
+            options_with_correctness = [(option, i in correct_indices) 
+                                       for i, option in enumerate(question['options'])]
+            
+            # Shuffle the pairs
+            random.shuffle(options_with_correctness)
+            
+            # Extract shuffled options and find new correct indices
+            shuffled_options = [option for option, _ in options_with_correctness]
+            new_answer_indices = [i for i, (_, is_correct) in enumerate(options_with_correctness) if is_correct]
+            
+            # Update question
+            question['options'] = shuffled_options
+            question['answer_indices'] = new_answer_indices
     
     def calculate_scores(self, user_answers: Dict[str, Any]) -> Dict[str, float]:
         """Calculate scores by competency"""
