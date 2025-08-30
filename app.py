@@ -105,6 +105,13 @@ def display_question():
     quiz_engine = st.session_state.quiz_engine
     current_q_idx = st.session_state.current_question
     
+    # Safety check - if quiz engine is not ready, return to selection
+    if quiz_engine is None:
+        st.error("Quiz not properly initialized. Please select a quiz again.")
+        reset_quiz_state()
+        st.rerun()
+        return
+    
     if current_q_idx >= len(quiz_engine.selected_questions):
         st.session_state.quiz_completed = True
         st.rerun()
