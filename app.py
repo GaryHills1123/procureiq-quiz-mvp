@@ -90,15 +90,6 @@ def display_quiz_selection(available_quizzes):
         selected_slug = quiz_options[selected_title]
         quiz_data = available_quizzes[selected_slug]['data']
         
-        # Display scenario
-        st.subheader("Scenario")
-        st.write(quiz_data['scenario'])
-        
-        # Display learning objectives
-        st.subheader("Learning Objectives")
-        for objective in quiz_data['learning_objectives']:
-            st.write(f"• {objective}")
-        
         if st.button("Start Quiz", type="primary"):
             st.session_state.selected_quiz = selected_slug
             st.session_state.quiz_engine = QuizEngine(quiz_data)
