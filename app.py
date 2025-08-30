@@ -336,6 +336,26 @@ def main():
                 st.rerun()
         
         st.write("---")
+        st.write("**AI Help Status:**")
+        if hasattr(st.session_state, 'ai_helper_error') and st.session_state.ai_helper_error:
+            st.error(f"❌ AI Help: {st.session_state.ai_helper_error}")
+        elif st.session_state.ai_helper:
+            st.success("✅ AI Help: Ready")
+            # Simple test button
+            if st.button("🧪 Test AI Connection"):
+                try:
+                    test_response = st.session_state.ai_helper.client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[{"role": "user", "content": "Say 'AI connection works!'"}],
+                        max_tokens=10
+                    )
+                    st.success("✅ AI connection successful!")
+                except Exception as e:
+                    st.error(f"❌ AI connection failed: {str(e)}")
+        else:
+            st.warning("⚠️ AI Help: Not initialized")
+        
+        st.write("---")
         st.write("**Core Competencies:**")
         competencies = [
             "Check the Facts",
