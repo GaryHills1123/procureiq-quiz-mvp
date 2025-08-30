@@ -193,25 +193,26 @@ def display_question():
         st.error("AI Helper not initialized. Please refresh the page.")
         return
     
-    help_request = st.text_input(
-        "Ask for a hint or clarification:",
-        placeholder="e.g., 'provide a hint', 'clarify option 2', 'explain the context'"
-    )
-    
-    if st.button("Get Help"):
-        if not help_request.strip():
-            st.error("Please enter a question or request for help.")
-        else:
-            with st.spinner("Getting AI assistance..."):
-                try:
-                    st.write(f"Debug: Processing request: '{help_request}'")
-                    help_response = st.session_state.ai_helper.get_help(question, help_request)
-                    st.success("AI Response:")
-                    st.info(help_response)
-                except Exception as e:
-                    st.error(f"Error getting AI help: {str(e)}")
-                    st.write(f"Debug: Error type: {type(e).__name__}")
-                    st.write("Please try again or contact support if the issue persists.")
+    # Use a form so Enter key submits the help request
+    with st.form(key=f"help_form_{question['id']}"):
+        help_request = st.text_input(
+            "Ask for a hint or clarification:",
+            placeholder="e.g., 'provide a hint', 'clarify option 2', 'explain the context'"
+        )
+        help_submitted = st.form_submit_button("Get Help (or press Enter)")
+        
+        if help_submitted:
+            if not help_request.strip():
+                st.error("Please enter a question or request for help.")
+            else:
+                with st.spinner("Getting AI assistance..."):
+                    try:
+                        help_response = st.session_state.ai_helper.get_help(question, help_request)
+                        st.success("AI Response:")
+                        st.info(help_response)
+                    except Exception as e:
+                        st.error(f"Error getting AI help: {str(e)}")
+                        st.write("Please try again or contact support if the issue persists.")
     
     # Navigation buttons
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -334,26 +335,6 @@ def main():
             if st.button("Return to Quiz Selection"):
                 reset_quiz_state()
                 st.rerun()
-        
-        st.write("---")
-        st.write("**AI Help Status:**")
-        if hasattr(st.session_state, 'ai_helper_error') and st.session_state.ai_helper_error:
-            st.error(f"❌ AI Help: {st.session_state.ai_helper_error}")
-        elif st.session_state.ai_helper:
-            st.success("✅ AI Help: Ready")
-            # Simple test button
-            if st.button("🧪 Test AI Connection"):
-                try:
-                    test_response = st.session_state.ai_helper.client.chat.completions.create(
-                        model="gpt-4o-mini",
-                        messages=[{"role": "user", "content": "Say 'AI connection works!'"}],
-                        max_tokens=10
-                    )
-                    st.success("✅ AI connection successful!")
-                except Exception as e:
-                    st.error(f"❌ AI connection failed: {str(e)}")
-        else:
-            st.warning("⚠️ AI Help: Not initialized")
         
         st.write("---")
         st.write("**Core Competencies:**")
