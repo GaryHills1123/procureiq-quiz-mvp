@@ -95,8 +95,10 @@ def display_quiz_selection(available_quizzes):
         if st.button("Start Quiz", type="primary"):
             st.session_state.selected_quiz = selected_slug
             st.session_state.quiz_engine = QuizEngine(quiz_data)
-            st.session_state.quiz_started = True
-            reset_quiz_state()
+            # Reset only the quiz progress, not the started state
+            st.session_state.current_question = 0
+            st.session_state.user_answers = {}
+            st.session_state.quiz_completed = False
             st.session_state.quiz_started = True
             st.rerun()
 
