@@ -275,7 +275,7 @@ def main():
             quiz_title = available_quizzes[st.session_state.selected_quiz]['title']
             st.write(f"**Current Quiz:** {quiz_title}")
             
-            if not st.session_state.quiz_completed:
+            if not st.session_state.quiz_completed and st.session_state.quiz_engine:
                 st.write(f"**Progress:** {st.session_state.current_question + 1}/{len(st.session_state.quiz_engine.selected_questions)}")
             
             if st.button("Return to Quiz Selection"):
