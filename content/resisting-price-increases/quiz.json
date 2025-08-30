@@ -16,6 +16,43 @@
     {"key": "strategy", "label": "Choose the Right Supplier Strategy"},
     {"key": "improvement", "label": "Learn and Improve"}
   ],
+  "data_tables": [
+    {
+      "title": "Supplier's Claimed Cost Breakdown",
+      "description": "Cost structure provided by supplier to justify the 10% increase",
+      "headers": ["Cost Component", "% of Total Cost", "Claimed Increase", "Justification"],
+      "rows": [
+        ["Raw Materials", "45%", "+15%", "Steel prices up due to supply chain"],
+        ["Energy", "12%", "+20%", "Natural gas costs doubled"],
+        ["Labor", "25%", "+8%", "Wage inflation and overtime"],
+        ["Transportation", "8%", "+12%", "Fuel costs and driver shortage"],
+        ["Overhead", "10%", "+5%", "General inflation"]
+      ]
+    },
+    {
+      "title": "Market Indices (6-Month Trend)",
+      "description": "Independent market data for key cost components",
+      "headers": ["Index", "6 Months Ago", "3 Months Ago", "Current", "% Change"],
+      "rows": [
+        ["Steel HRC Index", "$1,200/ton", "$1,180/ton", "$1,260/ton", "+5.0%"],
+        ["Natural Gas (TTF)", "$85/MWh", "$78/MWh", "$92/MWh", "+8.2%"],
+        ["Manufacturing Wages", "Index 105", "Index 107", "Index 109", "+3.8%"],
+        ["Diesel Fuel", "$3.85/gal", "$3.92/gal", "$4.12/gal", "+7.0%"],
+        ["Industrial CPI", "Index 287", "Index 289", "Index 292", "+1.7%"]
+      ]
+    },
+    {
+      "title": "Alternative Supplier Comparison",
+      "description": "Competitive landscape and backup options",
+      "headers": ["Supplier", "Current Price", "Quality Rating", "Lead Time", "Capacity"],
+      "rows": [
+        ["Current Supplier", "$100/unit", "A+", "4 weeks", "High"],
+        ["Alternative A", "$98/unit", "A", "6 weeks", "Medium"],
+        ["Alternative B", "$105/unit", "A+", "3 weeks", "High"],
+        ["Alternative C", "$95/unit", "B+", "8 weeks", "Low"]
+      ]
+    }
+  ],
   "improvement_rubric": {
     "analysis": [
       "Always request a cost breakdown (cost tree).",

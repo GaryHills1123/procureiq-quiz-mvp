@@ -139,6 +139,18 @@ def display_question():
         st.write("**Learning Objectives:**")
         for objective in quiz_engine.quiz_data['learning_objectives']:
             st.write(f"• {objective}")
+            
+        # Display data tables if available
+        if 'data_tables' in quiz_engine.quiz_data:
+            st.write("**📊 Reference Data:**")
+            for table in quiz_engine.quiz_data['data_tables']:
+                with st.expander(f"📈 {table['title']}", expanded=False):
+                    st.write(f"*{table['description']}*")
+                    
+                    # Create DataFrame for better display
+                    import pandas as pd
+                    df = pd.DataFrame(table['rows'], columns=table['headers'])
+                    st.dataframe(df, use_container_width=True)
     
     # Question stem
     st.subheader(question['stem'])
