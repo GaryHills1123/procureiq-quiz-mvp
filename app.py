@@ -150,7 +150,7 @@ def display_question():
                     # Create DataFrame for better display
                     import pandas as pd
                     df = pd.DataFrame(table['rows'], columns=table['headers'])
-                    st.dataframe(df, use_container_width=True)
+                    st.dataframe(df, width='stretch')
     
     # Question stem
     st.subheader(question['stem'])
@@ -226,45 +226,40 @@ def display_question():
                         st.error(f"Error getting AI help: {str(e)}")
                         st.write("Please try again or contact support if the issue persists.")
     
-    # Navigation buttons
+    # Navigation buttons - always visible for consistency
     col1, col2, col3 = st.columns([1, 1, 1])
     
+    # Check if current question has a valid answer
+    has_valid_answer = False
+    if question['id'] in st.session_state.user_answers:
+        answer = st.session_state.user_answers[question['id']]
+        if question['type'] == 'multi':
+            has_valid_answer = len(answer) == question['select_count']
+        else:
+            has_valid_answer = True
+    
     with col1:
-        if current_q_idx > 0:
-            if st.button("Previous"):
-                st.session_state.current_question -= 1
-                st.rerun()
+        if st.button("Previous", disabled=current_q_idx == 0):
+            st.session_state.current_question -= 1
+            st.rerun()
     
     with col2:
-        if st.button("Next"):
-            # Validate answer before proceeding
-            if question['id'] in st.session_state.user_answers:
-                answer = st.session_state.user_answers[question['id']]
-                
-                if question['type'] == 'multi':
-                    if len(answer) != question['select_count']:
-                        st.error(f"Please select exactly {question['select_count']} options before proceeding.")
-                        return
-                
-                st.session_state.current_question += 1
-                st.rerun()
-            else:
-                st.error("Please select an answer before proceeding.")
+        is_last_question = current_q_idx >= len(quiz_engine.selected_questions) - 1
+        if st.button("Next", disabled=is_last_question or not has_valid_answer):
+            st.session_state.current_question += 1
+            st.rerun()
     
     with col3:
-        if st.button("Finish Quiz"):
-            if question['id'] in st.session_state.user_answers:
-                answer = st.session_state.user_answers[question['id']]
-                
-                if question['type'] == 'multi':
-                    if len(answer) != question['select_count']:
-                        st.error(f"Please select exactly {question['select_count']} options before finishing.")
-                        return
-                
-                st.session_state.quiz_completed = True
-                st.rerun()
-            else:
-                st.error("Please select an answer before finishing.")
+        if st.button("Finish Quiz", disabled=not has_valid_answer):
+            st.session_state.quiz_completed = True
+            st.rerun()
+    
+    # Show helpful message if answer not selected
+    if not has_valid_answer:
+        if question['type'] == 'multi':
+            st.info(f"💡 Please select exactly {question['select_count']} options to proceed.")
+        else:
+            st.info("💡 Please select an answer to proceed.")
 
 def display_results():
     """Display quiz results with radar chart and improvement suggestions"""
@@ -285,7 +280,7 @@ def display_results():
     # Radar chart
     st.subheader("Competency Assessment")
     fig = create_radar_chart(scores, quiz_engine.quiz_data['skills_catalog'])
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     # AI-generated improvement suggestions
     st.subheader("Improvement Suggestions")
