@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "slug": "resisting-price-increases",
+  "title": "Case Study: Resisting Price Increases",
+  "scenario": "You are the procurement manager at a mid-sized manufacturer. A key supplier emails announcing a 10% price increase, citing 'inflationary pressures and rising energy costs'. Your CFO wants continuity but expects you to resist unjustified costs.",
+  "learning_objectives": [
+    "Recognize supplier tactics in price increases",
+    "Apply data-driven verification and negotiation steps",
+    "Practice value-based and risk-aware procurement skills"
+  ],
+  "skills_catalog": [
+    {"key": "analysis", "label": "Check the Facts"},
+    {"key": "costs", "label": "Break Down the Costs"},
+    {"key": "market", "label": "Know the Market"},
+    {"key": "negotiation", "label": "Negotiate for Value"},
+    {"key": "strategy", "label": "Choose the Right Supplier Strategy"},
+    {"key": "improvement", "label": "Learn and Improve"}
+  ],
+  "improvement_rubric": {
+    "analysis": [
+      "Always request a cost breakdown (cost tree).",
+      "Cross-check supplier claims with trusted indices."
+    ],
+    "costs": [
+      "Challenge components that have not increased.",
+      "Avoid debating a flat percentage; focus on itemized data."
+    ],
+    "market": [
+      "Monitor commodity indices monthly.",
+      "Insist on symmetry: reductions when inputs fall."
+    ],
+    "negotiation": [
+      "Trade price for terms, lead time, or service improvements.",
+      "Reject firmly but remain respectful to the person."
+    ],
+    "strategy": [
+      "Adapt tactics to supplier category (strategic vs leverage).",
+      "Benchmark and maintain at least one viable alternative."
+    ],
+    "improvement": [
+      "Document negotiation outcomes and lessons learned.",
+      "Ensure tactics used comply with ethics and policy."
+    ]
+  },
+  "scoring": { "deliver_count": 10, "multi_select_policy": "reject_wrong_count" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "stem": "What is the best first step when you receive the supplier's 10% increase request?",
+      "options": [
+        "Reject firmly but respectfully",
+        "Accept the increase to ensure continuity",
+        "Escalate directly to CFO without reply",
+        "Delay response and wait"
+      ],
+      "answer_index": 0,
+      "explain": "Step 1 is to reject the increase firmly but professionally.",
+      "skills": [{"key": "analysis", "weight": 1.0}],
+      "hints": ["Signal you are not a price taker."]
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "stem": "Why do some suppliers announce vague across-the-board increases?",
+      "options": [
+        "To test which customers are price takers",
+        "Because regulation requires it",
+        "To strengthen the relationship",
+        "Because all input costs always rise together"
+      ],
+      "answer_index": 0,
+      "explain": "Suppliers often 'test the waters' to see who resists.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "select_count": 2,
+      "stem": "Which TWO actions are essential when verifying a supplier's claim?",
+      "options": [
+        "Request a detailed cost breakdown",
+        "Validate with third-party indices",
+        "Accept vague inflation claims",
+        "Focus only on total % increase"
+      ],
+      "answer_indices": [0,1],
+      "explain": "Verification = cost tree + independent data.",
+      "skills": [{"key": "analysis", "weight": 0.7}, {"key": "market", "weight": 0.3}]
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "stem": "Energy is 12% of COGS. The index rises 20%. What is the legitimate pass-through?",
+      "options": ["2.4%", "6%", "12%", "20%"],
+      "answer_index": 0,
+      "explain": "12% × 20% = 2.4%.",
+      "skills": [{"key": "analysis", "weight": 1.0}]
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "stem": "Why break down a supplier's cost structure instead of debating a flat %?",
+      "options": [
+        "It reveals which inputs truly drive increases",
+        "It saves time avoiding data",
+        "It makes the supplier feel supported",
+        "It avoids involving external benchmarks"
+      ],
+      "answer_index": 0,
+      "explain": "Breaking down reveals what is real vs inflated.",
+      "skills": [{"key": "costs", "weight": 1.0}]
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "select_count": 2,
+      "stem": "Which TWO practices enforce fairness when commodity costs drop?",
+      "options": [
+        "Monitor relevant indices regularly",
+        "Include symmetry clauses in contracts",
+        "Wait for supplier to propose reductions",
+        "Accept increases without question"
+      ],
+      "answer_indices": [0,1],
+      "explain": "Monitoring + symmetry clauses ensure fairness.",
+      "skills": [{"key": "market", "weight": 1.0}]
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "stem": "Supplier refuses to reduce prices when indices fall. What should you do?",
+      "options": [
+        "Initiate the reduction discussion using data",
+        "Accept silence to preserve relationship",
+        "Wait until contract renewal",
+        "Escalate to legal immediately"
+      ],
+      "answer_index": 0,
+      "explain": "Be proactive: present data and request reduction.",
+      "skills": [{"key": "market", "weight": 1.0}]
+    },
+    {
+      "id": "q8",
+      "type": "multi",
+      "select_count": 2,
+      "stem": "If you cannot block an increase fully, which TWO tactics manage impact?",
+      "options": [
+        "Negotiate to defer implementation",
+        "Split increase over periods",
+        "Switch suppliers immediately",
+        "Accept full increase and pass on to customers"
+      ],
+      "answer_indices": [0,1],
+      "explain": "Deferrals and phasing mitigate short-term impact.",
+      "skills": [{"key": "negotiation", "weight": 1.0}]
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "stem": "Which reflects value-based negotiation?",
+      "options": [
+        "Accept +3% if supplier cuts lead time by 20%",
+        "Accept +3% without conditions",
+        "Reject all price increases always",
+        "Accept +5% for holiday gifts"
+      ],
+      "answer_index": 0,
+      "explain": "Trade price for service improvements = value-based.",
+      "skills": [{"key": "negotiation", "weight": 1.0}]
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "stem": "When is switching suppliers the right strategy?",
+      "options": [
+        "After exhausting collaboration and when alternatives exist",
+        "At the first sign of any increase",
+        "Whenever another supplier offers any discount",
+        "Only when CFO says so"
+      ],
+      "answer_index": 0,
+      "explain": "Switching is a last resort, only with alternatives.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
+    }
+  ]
+}
