@@ -86,7 +86,7 @@ def display_quiz_selection(available_quizzes):
     - **Choose the Right Supplier Strategy** - Supplier selection and management
     - **Learn and Improve** - Continuous improvement and adaptation
     
-    Each quiz presents 10 questions that test your procurement decision-making. You'll receive a competency assessment with visual feedback and personalized improvement suggestions.
+    Each quiz presents 10 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
     """)
     
     st.write("Select a case study quiz to begin your procurement training.")
