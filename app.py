@@ -284,28 +284,31 @@ def display_results():
     fig = create_radar_chart(scores, quiz_engine.quiz_data['skills_catalog'], quiz_engine.selected_questions)
     st.plotly_chart(fig, use_container_width=True)
     
-    # AI-generated improvement suggestions
-    st.subheader("Improvement Suggestions")
-    with st.spinner("Generating personalized improvement suggestions..."):
-        try:
-            suggestions = st.session_state.ai_helper.get_improvement_suggestions(
-                scores, 
-                quiz_engine.quiz_data['skills_catalog'],
-                quiz_engine.quiz_data['improvement_rubric']
-            )
-            
-            for skill_key, suggestion in suggestions.items():
-                skill_label = next(
-                    (skill['label'] for skill in quiz_engine.quiz_data['skills_catalog'] 
-                     if skill['key'] == skill_key), 
-                    skill_key
+    # AI-generated improvement suggestions (only for scores 90% or below)
+    if percentage <= 90:
+        st.subheader("Improvement Suggestions")
+        with st.spinner("Generating personalized improvement suggestions..."):
+            try:
+                suggestions = st.session_state.ai_helper.get_improvement_suggestions(
+                    scores, 
+                    quiz_engine.quiz_data['skills_catalog'],
+                    quiz_engine.quiz_data['improvement_rubric']
                 )
-                st.write(f"**{skill_label}:**")
-                st.write(suggestion)
-                st.write("")
                 
-        except Exception as e:
-            st.error(f"Error generating improvement suggestions: {e}")
+                for skill_key, suggestion in suggestions.items():
+                    skill_label = next(
+                        (skill['label'] for skill in quiz_engine.quiz_data['skills_catalog'] 
+                         if skill['key'] == skill_key), 
+                        skill_key
+                    )
+                    st.write(f"**{skill_label}:**")
+                    st.write(suggestion)
+                    st.write("")
+                    
+            except Exception as e:
+                st.error(f"Error generating improvement suggestions: {e}")
+    else:
+        st.success("🌟 Excellent performance! You've demonstrated strong competency across all areas.")
     
     # Quiz completion analysis
     st.subheader("Review")
