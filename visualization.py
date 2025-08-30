@@ -1,26 +1,37 @@
 import plotly.graph_objects as go
 import plotly.express as px
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
-def create_radar_chart(scores: Dict[str, float], skills_catalog: List[Dict[str, Any]]) -> go.Figure:
+def create_radar_chart(scores: Dict[str, float], skills_catalog: List[Dict[str, Any]], quiz_questions: Optional[List[Dict[str, Any]]] = None) -> go.Figure:
     """Create a radar chart showing competency scores"""
+    
+    # Calculate maximum possible score for each competency
+    max_possible_scores = {}
+    if quiz_questions:
+        for skill in skills_catalog:
+            max_possible_scores[skill['key']] = 0.0
+        
+        for question in quiz_questions:
+            for skill in question.get('skills', []):
+                skill_key = skill['key']
+                weight = skill.get('weight', 1.0)
+                if skill_key in max_possible_scores:
+                    max_possible_scores[skill_key] += weight
     
     # Prepare data for radar chart
     categories = []
     values = []
     
-    # Get max score for normalization
-    max_score = max(scores.values()) if scores.values() else 1
-    
     for skill in skills_catalog:
         skill_key = skill['key']
         skill_label = skill['label']
         score = scores.get(skill_key, 0)
+        max_possible = max_possible_scores.get(skill_key, 1) if quiz_questions else 1
         
         categories.append(skill_label)
-        # Normalize to 0-100 scale for better visualization
-        normalized_score = (score / max_score * 100) if max_score > 0 else 0
-        values.append(normalized_score)
+        # Calculate percentage of possible score for this competency
+        percentage = (score / max_possible * 100) if max_possible > 0 else 0
+        values.append(percentage)
     
     # Close the radar chart by adding the first point at the end
     categories_closed = categories + [categories[0]]
