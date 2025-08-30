@@ -189,7 +189,9 @@ def display_question():
                 help_response = st.session_state.ai_helper.get_help(question, help_request)
                 st.info(help_response)
             except Exception as e:
-                st.error(f"Error getting AI help: {e}")
+                st.error(f"Error getting AI help: {str(e)}")
+                # Show more detailed error for debugging
+                st.write("Please try again or contact support if the issue persists.")
     
     # Navigation buttons
     col1, col2, col3 = st.columns([1, 1, 1])

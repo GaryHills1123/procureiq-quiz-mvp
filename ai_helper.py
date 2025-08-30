@@ -10,9 +10,8 @@ class AIHelper:
             raise ValueError("OPENAI_API_KEY environment variable is required")
         
         self.client = OpenAI(api_key=api_key)
-        # the newest OpenAI model is "gpt-5" which was released August 7, 2025.
-        # do not change this unless explicitly requested by the user
-        self.model = os.getenv("QUIZ_OPENAI_MODEL", "gpt-5")
+        # Use a reliable OpenAI model for production
+        self.model = os.getenv("QUIZ_OPENAI_MODEL", "gpt-4o-mini")
     
     def get_help(self, question: Dict[str, Any], help_request: str) -> str:
         """Get AI-powered help for a specific question"""
