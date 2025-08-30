@@ -281,8 +281,8 @@ def display_results():
     
     # Radar chart
     st.subheader("Competency Assessment")
-    fig = create_radar_chart(scores, quiz_engine.quiz_data['skills_catalog'])
-    st.plotly_chart(fig, width='stretch')
+    fig = create_radar_chart(scores, quiz_engine.quiz_data['skills_catalog'], quiz_engine.selected_questions)
+    st.plotly_chart(fig, use_container_width=True)
     
     # AI-generated improvement suggestions
     st.subheader("Improvement Suggestions")
