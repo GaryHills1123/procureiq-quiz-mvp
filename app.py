@@ -71,7 +71,7 @@ def reset_quiz_state():
 
 def display_quiz_selection(available_quizzes):
     """Display quiz selection interface"""
-    st.title("ProcureIQ Quiz MVP")
+    st.title("ProcureIQ")
     
     # Intro to ProcureIQ
     st.subheader("Intro to ProcureIQ")
