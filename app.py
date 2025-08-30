@@ -42,7 +42,12 @@ def initialize_session_state():
     if 'quiz_engine' not in st.session_state:
         st.session_state.quiz_engine = None
     if 'ai_helper' not in st.session_state:
-        st.session_state.ai_helper = AIHelper()
+        try:
+            st.session_state.ai_helper = AIHelper()
+            st.session_state.ai_helper_error = None
+        except Exception as e:
+            st.session_state.ai_helper = None
+            st.session_state.ai_helper_error = str(e)
     if 'current_question' not in st.session_state:
         st.session_state.current_question = 0
     if 'user_answers' not in st.session_state:
@@ -178,20 +183,35 @@ def display_question():
     
     # AI Helper section
     st.subheader("Need Help?")
+    
+    # Check if AI helper is available
+    if st.session_state.ai_helper_error:
+        st.error(f"AI Help not available: {st.session_state.ai_helper_error}")
+        return
+    
+    if not st.session_state.ai_helper:
+        st.error("AI Helper not initialized. Please refresh the page.")
+        return
+    
     help_request = st.text_input(
         "Ask for a hint or clarification:",
         placeholder="e.g., 'provide a hint', 'clarify option 2', 'explain the context'"
     )
     
-    if st.button("Get Help") and help_request:
-        with st.spinner("Getting AI assistance..."):
-            try:
-                help_response = st.session_state.ai_helper.get_help(question, help_request)
-                st.info(help_response)
-            except Exception as e:
-                st.error(f"Error getting AI help: {str(e)}")
-                # Show more detailed error for debugging
-                st.write("Please try again or contact support if the issue persists.")
+    if st.button("Get Help"):
+        if not help_request.strip():
+            st.error("Please enter a question or request for help.")
+        else:
+            with st.spinner("Getting AI assistance..."):
+                try:
+                    st.write(f"Debug: Processing request: '{help_request}'")
+                    help_response = st.session_state.ai_helper.get_help(question, help_request)
+                    st.success("AI Response:")
+                    st.info(help_response)
+                except Exception as e:
+                    st.error(f"Error getting AI help: {str(e)}")
+                    st.write(f"Debug: Error type: {type(e).__name__}")
+                    st.write("Please try again or contact support if the issue persists.")
     
     # Navigation buttons
     col1, col2, col3 = st.columns([1, 1, 1])
