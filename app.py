@@ -140,14 +140,27 @@ def display_question():
     
     # Display options based on question type
     if question['type'] == 'single':
-        # Single select
+        # Single select with default "choose one" option
+        options_with_default = [-1] + list(range(len(question['options'])))
+        
+        def format_option(x):
+            if x == -1:
+                return "— Choose one of the following —"
+            return question['options'][x]
+        
         answer = st.radio(
             "Select one option:",
-            options=range(len(question['options'])),
-            format_func=lambda x: question['options'][x],
+            options=options_with_default,
+            format_func=format_option,
             key=f"q_{question['id']}"
         )
-        st.session_state.user_answers[question['id']] = answer
+        
+        # Only save valid answers (not the default)
+        if answer != -1:
+            st.session_state.user_answers[question['id']] = answer
+        elif question['id'] in st.session_state.user_answers:
+            # Remove any previous answer if back to default
+            del st.session_state.user_answers[question['id']]
         
     elif question['type'] == 'multi':
         # Multi select
