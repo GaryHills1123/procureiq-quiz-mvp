@@ -72,6 +72,23 @@ def reset_quiz_state():
 def display_quiz_selection(available_quizzes):
     """Display quiz selection interface"""
     st.title("ProcureIQ Quiz MVP")
+    
+    # Intro to ProcureIQ
+    st.subheader("Intro to ProcureIQ")
+    st.write("""
+    Welcome to ProcureIQ, your interactive procurement training platform! Our case-study quizzes help you develop essential buyer competencies through real-world scenarios.
+    
+    **What you'll learn:**
+    - **Check the Facts** - Data verification and analysis skills
+    - **Break Down the Costs** - Cost analysis and financial evaluation  
+    - **Know the Market** - Market research and industry knowledge
+    - **Negotiate for Value** - Strategic negotiation techniques
+    - **Choose the Right Supplier Strategy** - Supplier selection and management
+    - **Learn and Improve** - Continuous improvement and adaptation
+    
+    Each quiz presents 10 questions that test your procurement decision-making. You'll receive a competency assessment with visual feedback and personalized improvement suggestions.
+    """)
+    
     st.write("Select a case study quiz to begin your procurement training.")
     
     if not available_quizzes:
