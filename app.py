@@ -305,19 +305,30 @@ def display_results():
         except Exception as e:
             st.error(f"Error generating improvement suggestions: {e}")
     
-    # Missed questions
+    # Quiz completion analysis
     st.subheader("Review")
     missed_questions = quiz_engine.get_missed_questions(st.session_state.user_answers)
+    total_questions = len(quiz_engine.selected_questions)
+    answered_questions = len(st.session_state.user_answers)
     
-    if missed_questions:
+    if answered_questions == total_questions and len(missed_questions) == 0:
+        st.success("🎉 Congratulations! You answered all questions correctly!")
+    elif answered_questions < total_questions:
+        st.info(f"📝 Quiz completed early - you answered {answered_questions} out of {total_questions} questions.")
+        if missed_questions:
+            st.write("**Questions you got wrong:**")
+            for question in missed_questions:
+                with st.expander(f"Question: {question['stem']}"):
+                    st.write(f"**Your answer:** {question['user_answer_text']}")
+                    st.write(f"**Correct answer:** {question['correct_answer_text']}")
+                    st.write(f"**Explanation:** {question['explain']}")
+    else:
         st.write("**Questions you got wrong:**")
         for question in missed_questions:
             with st.expander(f"Question: {question['stem']}"):
                 st.write(f"**Your answer:** {question['user_answer_text']}")
                 st.write(f"**Correct answer:** {question['correct_answer_text']}")
                 st.write(f"**Explanation:** {question['explain']}")
-    else:
-        st.success("Congratulations! You answered all questions correctly!")
     
     # Restart option
     if st.button("Take Another Quiz"):
