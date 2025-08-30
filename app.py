@@ -196,18 +196,10 @@ def display_question():
     # Use a form so Enter key submits the help request
     with st.form(key=f"help_form_{question['id']}"):
         help_request = st.text_input(
-            "Ask for a hint or clarification (press Enter to submit):",
+            "Ask for a hint or clarification:",
             placeholder="e.g., 'provide a hint', 'clarify option 2', 'explain the context'"
         )
-        # Hide the submit button with CSS but keep Enter key functionality
-        st.markdown("""
-            <style>
-            .stForm > div:last-child {
-                display: none;
-            }
-            </style>
-        """, unsafe_allow_html=True)
-        help_submitted = st.form_submit_button("Submit")
+        help_submitted = st.form_submit_button("Get Help")
         
         if help_submitted:
             if not help_request.strip():
