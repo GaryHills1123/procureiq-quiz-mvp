@@ -58,6 +58,8 @@ def initialize_session_state():
         st.session_state.selected_quiz = None
     if 'quiz_started' not in st.session_state:
         st.session_state.quiz_started = False
+    if 'user_name' not in st.session_state:
+        st.session_state.user_name = "test user"
 
 def reset_quiz_state():
     """Reset quiz-related session state"""
@@ -340,7 +342,10 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.header("Navigation")
+        # User identification
+        user_name = st.text_input("User Name:", value=st.session_state.user_name, key="user_name_input")
+        st.session_state.user_name = user_name
+        
         available_quizzes = load_available_quizzes()
         
         if st.session_state.quiz_started and st.session_state.selected_quiz:
