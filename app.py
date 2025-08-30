@@ -126,6 +126,15 @@ def display_question():
     st.progress(progress)
     st.write(f"Question {current_q_idx + 1} of {len(quiz_engine.selected_questions)}")
     
+    # Display scenario context
+    with st.expander("📋 Case Study Scenario (Click to view)", expanded=current_q_idx == 0):
+        st.write("**Scenario:**")
+        st.write(quiz_engine.quiz_data['scenario'])
+        
+        st.write("**Learning Objectives:**")
+        for objective in quiz_engine.quiz_data['learning_objectives']:
+            st.write(f"• {objective}")
+    
     # Question stem
     st.subheader(question['stem'])
     
