@@ -37,6 +37,45 @@ def load_available_quizzes():
     
     return quizzes
 
+def shuffle_question_options(question):
+    """Shuffle answer options and update indices accordingly"""
+    import random
+    
+    if question['type'] == 'single':
+        # Create list of (option, is_correct) pairs
+        options_with_correctness = [(option, i == question['answer_index']) 
+                                   for i, option in enumerate(question['options'])]
+        
+        # Shuffle the pairs
+        random.shuffle(options_with_correctness)
+        
+        # Extract shuffled options and find new correct index
+        shuffled_options = [option for option, _ in options_with_correctness]
+        new_answer_index = next(i for i, (_, is_correct) in enumerate(options_with_correctness) if is_correct)
+        
+        # Update question
+        question['options'] = shuffled_options
+        question['answer_index'] = new_answer_index
+        
+    elif question['type'] == 'multi':
+        # Create list of (option, is_correct) pairs
+        correct_indices = set(question['answer_indices'])
+        options_with_correctness = [(option, i in correct_indices) 
+                                   for i, option in enumerate(question['options'])]
+        
+        # Shuffle the pairs
+        random.shuffle(options_with_correctness)
+        
+        # Extract shuffled options and find new correct indices
+        shuffled_options = [option for option, _ in options_with_correctness]
+        new_answer_indices = [i for i, (_, is_correct) in enumerate(options_with_correctness) if is_correct]
+        
+        # Update question
+        question['options'] = shuffled_options
+        question['answer_indices'] = new_answer_indices
+    
+    return question
+
 def initialize_session_state():
     """Initialize session state variables"""
     if 'quiz_engine' not in st.session_state:
