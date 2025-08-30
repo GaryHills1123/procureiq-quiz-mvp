@@ -1,0 +1,5 @@
+streamlit>=1.49.1
+openai>=1.102.0
+plotly>=6.3.0
+jsonschema>=4.25.1
+python-dotenv>=1.1.1
