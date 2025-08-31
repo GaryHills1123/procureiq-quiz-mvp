@@ -1,0 +1,234 @@
+{
+  "version": 1,
+  "slug": "budget-cut-challenge",
+  "title": "Case Study: Budget Cut Challenge",
+  "scenario": "You are the procurement manager at a manufacturing company. The CFO has mandated a 15% cost reduction across all procurement categories within 6 months while maintaining current service levels. Your total annual spend is $12M across multiple categories, and you need to develop a strategic approach to achieve these savings without compromising operations.",
+  "learning_objectives": [
+    "Prioritize cost reduction opportunities using data-driven analysis",
+    "Apply market intelligence to validate pricing and identify savings",
+    "Develop negotiation strategies for sustainable cost reductions"
+  ],
+  "skills_catalog": [
+    {"key": "analysis", "label": "Check the Facts"},
+    {"key": "costs", "label": "Break Down the Costs"},
+    {"key": "market", "label": "Know the Market"},
+    {"key": "negotiation", "label": "Negotiate for Value"},
+    {"key": "strategy", "label": "Choose the Right Supplier Strategy"}
+  ],
+  "data_tables": [
+    {
+      "title": "Current Annual Spend Analysis",
+      "description": "Breakdown of $12M annual procurement spend by category",
+      "headers": ["Category", "Annual Spend", "% of Total", "# of Suppliers", "Contract Type"],
+      "rows": [
+        ["Raw Materials", "$4.8M", "40%", "12", "Long-term contracts"],
+        ["Packaging", "$1.8M", "15%", "8", "Annual agreements"],
+        ["Logistics", "$1.4M", "12%", "4", "Spot rates"],
+        ["Maintenance", "$1.2M", "10%", "15", "Service agreements"],
+        ["IT Services", "$1.0M", "8%", "6", "Multi-year contracts"],
+        ["Office Supplies", "$0.6M", "5%", "3", "Catalog pricing"],
+        ["Professional Services", "$0.8M", "7%", "10", "Project-based"],
+        ["Utilities", "$0.4M", "3%", "3", "Fixed rates"]
+      ]
+    },
+    {
+      "title": "Market Benchmark Analysis",
+      "description": "Competitive pricing analysis showing potential savings opportunities",
+      "headers": ["Category", "Current Price", "Market Benchmark", "Potential Savings", "Confidence Level"],
+      "rows": [
+        ["Raw Materials", "Index 100", "Index 95", "5%", "High"],
+        ["Packaging", "Index 100", "Index 88", "12%", "Medium"],
+        ["Logistics", "Index 100", "Index 92", "8%", "High"],
+        ["Maintenance", "Index 100", "Index 85", "15%", "Low"],
+        ["IT Services", "Index 100", "Index 90", "10%", "Medium"],
+        ["Office Supplies", "Index 100", "Index 75", "25%", "High"],
+        ["Professional Services", "Index 100", "Index 82", "18%", "Medium"],
+        ["Utilities", "Index 100", "Index 98", "2%", "High"]
+      ]
+    },
+    {
+      "title": "Supplier Performance Matrix",
+      "description": "Key supplier relationships and switching difficulty assessment",
+      "headers": ["Category", "Strategic Importance", "Supplier Dependency", "Switching Cost", "Relationship Quality"],
+      "rows": [
+        ["Raw Materials", "Critical", "High", "Very High", "Excellent"],
+        ["Packaging", "Important", "Medium", "Medium", "Good"],
+        ["Logistics", "Important", "Low", "Low", "Fair"],
+        ["Maintenance", "Moderate", "Medium", "High", "Good"],
+        ["IT Services", "Critical", "High", "High", "Excellent"],
+        ["Office Supplies", "Low", "Low", "Very Low", "Fair"],
+        ["Professional Services", "Moderate", "Low", "Low", "Good"],
+        ["Utilities", "Important", "High", "Very High", "Good"]
+      ]
+    }
+  ],
+  "improvement_rubric": {
+    "analysis": [
+      "Always start with comprehensive spend analysis by category.",
+      "Validate all savings opportunities with supporting data."
+    ],
+    "costs": [
+      "Break down costs to component level for targeted reductions.",
+      "Focus on categories with highest absolute savings potential."
+    ],
+    "market": [
+      "Use multiple benchmark sources to validate market pricing.",
+      "Monitor market conditions for optimal timing of negotiations."
+    ],
+    "negotiation": [
+      "Prepare alternative scenarios and walk-away positions.",
+      "Focus on value engineering rather than just price cuts."
+    ],
+    "strategy": [
+      "Balance quick wins with strategic long-term relationships.",
+      "Consider total cost of ownership, not just unit price."
+    ]
+  },
+  "scoring": { "deliver_count": 10, "multi_select_policy": "reject_wrong_count" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "stem": "Which category should you prioritize FIRST for cost reduction efforts?",
+      "options": [
+        "Office Supplies - highest potential savings percentage",
+        "Raw Materials - largest absolute spend",
+        "Packaging - good balance of savings potential and feasibility",
+        "Utilities - lowest risk to operations"
+      ],
+      "answer_index": 2,
+      "explain": "Packaging offers 12% savings potential ($216k) with medium confidence and manageable switching costs, providing the best risk-adjusted opportunity.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "stem": "Before negotiating with your raw materials supplier, what should you verify first?",
+      "options": [
+        "Confirm market benchmark data is current and accurate",
+        "Check if competitors offer better pricing",
+        "Review the contract termination clauses",
+        "Calculate total cost of switching suppliers"
+      ],
+      "answer_index": 0,
+      "explain": "Always verify your data foundation before entering negotiations - outdated benchmarks can undermine your position.",
+      "skills": [{"key": "analysis", "weight": 1.0}]
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "stem": "For the logistics category, which TWO approaches would be most effective for achieving 8% cost reduction?",
+      "options": [
+        "Renegotiate rates based on market benchmarks",
+        "Consolidate shipments to reduce frequency",
+        "Switch to cheapest available carrier immediately",
+        "Implement performance-based pricing model",
+        "Extend contract length for better rates"
+      ],
+      "select_count": 2,
+      "answer_indices": [0, 1],
+      "explain": "Market-based renegotiation addresses pricing directly, while shipment consolidation reduces total logistics need - both sustainable approaches.",
+      "skills": [{"key": "costs", "weight": 0.6}, {"key": "negotiation", "weight": 0.4}]
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "stem": "The maintenance category shows 15% potential savings but 'Low' confidence. What does this suggest?",
+      "options": [
+        "Market data may be unreliable or incomplete",
+        "This category should be your top priority",
+        "Maintenance costs are definitely too high",
+        "You should immediately switch suppliers"
+      ],
+      "answer_index": 0,
+      "explain": "Low confidence indicates uncertain or insufficient benchmark data - you need better market intelligence before acting.",
+      "skills": [{"key": "market", "weight": 1.0}]
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "stem": "For office supplies showing 25% potential savings, what's the best cost reduction approach?",
+      "options": [
+        "Implement e-procurement with catalog restrictions",
+        "Negotiate volume discounts with current supplier",
+        "Switch to lowest-cost supplier immediately",
+        "Reduce office supply budgets by 25%"
+      ],
+      "answer_index": 0,
+      "explain": "Systematic e-procurement with controls addresses both price and consumption - the root causes of overspend in this category.",
+      "skills": [{"key": "costs", "weight": 1.0}]
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "stem": "Your IT Services supplier has 'High' dependency and 'Excellent' relationship. How should you approach cost reduction?",
+      "options": [
+        "Focus on value engineering and service optimization",
+        "Threaten to switch unless they reduce prices",
+        "Accept current pricing to maintain relationship",
+        "Put the contract out for competitive bidding"
+      ],
+      "answer_index": 0,
+      "explain": "With strategic, high-dependency suppliers, collaborate on value engineering rather than aggressive price pressure that could damage the relationship.",
+      "skills": [{"key": "negotiation", "weight": 1.0}]
+    },
+    {
+      "id": "q7",
+      "type": "multi",
+      "stem": "Which THREE categories offer the best combination of savings potential and implementation feasibility?",
+      "options": [
+        "Office Supplies",
+        "Raw Materials", 
+        "Packaging",
+        "Logistics",
+        "Professional Services"
+      ],
+      "select_count": 3,
+      "answer_indices": [0, 2, 3],
+      "explain": "Office Supplies, Packaging, and Logistics all offer significant savings with manageable implementation risk and lower supplier dependency.",
+      "skills": [{"key": "strategy", "weight": 0.7}, {"key": "analysis", "weight": 0.3}]
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "stem": "To achieve the overall 15% reduction ($1.8M), what's the most realistic target breakdown?",
+      "options": [
+        "Focus all efforts on the single highest-opportunity category",
+        "Spread reductions equally across all categories",
+        "Target 3-4 categories with best risk-adjusted opportunities",
+        "Only pursue categories with 'High' confidence ratings"
+      ],
+      "answer_index": 2,
+      "explain": "A portfolio approach focusing on 3-4 optimal categories reduces risk while maximizing achievable savings.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "stem": "What should you do if suppliers push back claiming your benchmark data is outdated?",
+      "options": [
+        "Provide multiple recent data sources and methodology",
+        "Accept their pushback and reduce savings targets",
+        "Threaten to terminate the relationship",
+        "Agree to split the difference on pricing"
+      ],
+      "answer_index": 0,
+      "explain": "Credible, well-documented benchmark data is your strongest negotiation tool - be prepared to defend your analysis with multiple sources.",
+      "skills": [{"key": "market", "weight": 0.6}, {"key": "negotiation", "weight": 0.4}]
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "stem": "Six months later, you've achieved $1.2M in savings (10% reduction). The CFO wants the remaining $600k. What's your best response?",
+      "options": [
+        "Present analysis showing additional risks vs. diminishing returns",
+        "Immediately agree and commit to deeper cuts",
+        "Blame suppliers for being uncooperative",
+        "Suggest switching all remaining suppliers to achieve targets"
+      ],
+      "answer_index": 0,
+      "explain": "Professional analysis of risks and diminishing returns helps set realistic expectations while demonstrating your strategic thinking.",
+      "skills": [{"key": "analysis", "weight": 0.7}, {"key": "strategy", "weight": 0.3}]
+    }
+  ]
+}
