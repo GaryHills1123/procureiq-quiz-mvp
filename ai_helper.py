@@ -66,6 +66,78 @@ class AIHelper:
         except Exception as e:
             raise Exception(f"Failed to get AI help: {e}")
     
+    def get_answer_feedback(self, question: Dict[str, Any], user_answer: Any) -> str:
+        """Generate feedback on the user's answer"""
+        
+        # Check if answer is correct
+        is_correct = False
+        if question['type'] == 'single':
+            is_correct = user_answer == question['answer_index']
+        elif question['type'] == 'multi':
+            is_correct = set(user_answer) == set(question['answer_indices'])
+        
+        # Prepare context
+        context = f"""
+        Question: {question['stem']}
+        
+        Options:
+        """
+        
+        for i, option in enumerate(question['options']):
+            selected = ""
+            if question['type'] == 'single' and user_answer == i:
+                selected = " [SELECTED]"
+            elif question['type'] == 'multi' and i in user_answer:
+                selected = " [SELECTED]"
+            context += f"{i + 1}. {option}{selected}\n"
+        
+        # Add correct answer info for AI
+        if question['type'] == 'single':
+            correct_option = question['options'][question['answer_index']]
+            context += f"\nCorrect answer: {question['answer_index'] + 1}. {correct_option}\n"
+        else:
+            correct_options = [f"{i+1}. {question['options'][i]}" for i in question['answer_indices']]
+            context += f"\nCorrect answers: {', '.join(correct_options)}\n"
+        
+        # Add explanation if available
+        if 'explanation' in question and question['explanation']:
+            context += f"\nExplanation: {question['explanation']}\n"
+        
+        status = "correct" if is_correct else "incorrect"
+        
+        prompt = f"""
+        You are a procurement training assistant providing feedback on a student's answer.
+        
+        {context}
+        
+        The student's answer was {status}.
+        
+        Provide constructive feedback that:
+        - Confirms if they got it right or wrong
+        - Explains why the correct answer is right
+        - If they got it wrong, briefly explains what they missed
+        - Offers educational insight about the procurement concept
+        
+        Keep it encouraging and educational. Be concise but helpful.
+        """
+        
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are a helpful procurement training assistant providing answer feedback."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=250,
+                temperature=0.7
+            )
+            
+            content = response.choices[0].message.content
+            return content.strip() if content else "Unable to provide feedback at this time."
+            
+        except Exception as e:
+            return f"Answer {'correct' if is_correct else 'incorrect'}. Unable to provide detailed feedback at this time."
+    
     def get_improvement_suggestions(self, scores: Dict[str, float], skills_catalog: List[Dict[str, Any]], improvement_rubric: Dict[str, List[str]]) -> Dict[str, str]:
         """Generate personalized improvement suggestions based on performance"""
         

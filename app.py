@@ -99,6 +99,10 @@ def initialize_session_state():
         st.session_state.quiz_started = False
     if 'user_name' not in st.session_state:
         st.session_state.user_name = "test user"
+    if 'showing_feedback' not in st.session_state:
+        st.session_state.showing_feedback = False
+    if 'feedback_for_question' not in st.session_state:
+        st.session_state.feedback_for_question = None
 
 def reset_quiz_state():
     """Reset quiz-related session state"""
@@ -107,6 +111,8 @@ def reset_quiz_state():
     st.session_state.quiz_completed = False
     st.session_state.quiz_started = False
     st.session_state.quiz_engine = None
+    st.session_state.showing_feedback = False
+    st.session_state.feedback_for_question = None
 
 def display_quiz_selection(available_quizzes):
     """Display quiz selection interface"""
@@ -299,12 +305,16 @@ def display_question():
     with col2:
         is_last_question = current_q_idx >= len(quiz_engine.selected_questions) - 1
         if st.button("Next", disabled=is_last_question or not has_valid_answer):
-            st.session_state.current_question += 1
+            # Show feedback before moving to next question
+            st.session_state.showing_feedback = True
+            st.session_state.feedback_for_question = current_q_idx
             st.rerun()
     
     with col3:
         if st.button("Finish Quiz", disabled=not has_valid_answer):
-            st.session_state.quiz_completed = True
+            # Show feedback before finishing quiz
+            st.session_state.showing_feedback = True
+            st.session_state.feedback_for_question = current_q_idx
             st.rerun()
     
     # Show helpful message if answer not selected
@@ -313,6 +323,103 @@ def display_question():
             st.info(f"💡 Please select exactly {question['select_count']} options to proceed.")
         else:
             st.info("💡 Please select an answer to proceed.")
+
+def display_feedback():
+    """Display feedback for the current question"""
+    quiz_engine = st.session_state.quiz_engine
+    current_q_idx = st.session_state.feedback_for_question
+    
+    if current_q_idx is None or current_q_idx >= len(quiz_engine.selected_questions):
+        st.session_state.showing_feedback = False
+        st.rerun()
+        return
+    
+    question = quiz_engine.selected_questions[current_q_idx]
+    user_answer = st.session_state.user_answers.get(question['id'])
+    
+    if user_answer is None:
+        st.session_state.showing_feedback = False
+        st.rerun()
+        return
+    
+    # Progress bar
+    progress = (current_q_idx + 1) / len(quiz_engine.selected_questions)
+    st.progress(progress)
+    st.write(f"Question {current_q_idx + 1} of {len(quiz_engine.selected_questions)} - Feedback")
+    
+    # Show the question stem again
+    st.subheader(question['stem'])
+    
+    # Check if answer is correct
+    is_correct = False
+    if question['type'] == 'single':
+        is_correct = user_answer == question['answer_index']
+    elif question['type'] == 'multi':
+        is_correct = set(user_answer) == set(question['answer_indices'])
+    
+    # Show correct/incorrect status
+    if is_correct:
+        st.success("✅ Correct!")
+    else:
+        st.error("❌ Incorrect")
+    
+    # Show your answer and correct answer
+    with st.expander("Your Answer vs Correct Answer", expanded=True):
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.write("**Your Answer:**")
+            if question['type'] == 'single':
+                st.write(f"• {question['options'][user_answer]}")
+            else:
+                for idx in user_answer:
+                    st.write(f"• {question['options'][idx]}")
+        
+        with col2:
+            st.write("**Correct Answer:**")
+            if question['type'] == 'single':
+                st.write(f"• {question['options'][question['answer_index']]}")
+            else:
+                for idx in question['answer_indices']:
+                    st.write(f"• {question['options'][idx]}")
+    
+    # Generate and display AI feedback
+    if st.session_state.ai_helper and not st.session_state.ai_helper_error:
+        st.subheader("AI Feedback")
+        with st.spinner("Generating personalized feedback..."):
+            try:
+                feedback = st.session_state.ai_helper.get_answer_feedback(question, user_answer)
+                st.info(feedback)
+            except Exception as e:
+                st.error(f"Unable to generate feedback: {str(e)}")
+                if is_correct:
+                    st.info("Great job! You got this question correct.")
+                else:
+                    st.info("Review the correct answer above and try to understand the reasoning.")
+    else:
+        # Fallback feedback if AI not available
+        if is_correct:
+            st.info("Great job! You got this question correct.")
+        else:
+            st.info("Review the correct answer above and try to understand the reasoning.")
+    
+    # Continue button
+    col1, col2, col3 = st.columns([1, 1, 1])
+    
+    with col2:
+        is_last_question = current_q_idx >= len(quiz_engine.selected_questions) - 1
+        button_text = "Finish Quiz" if is_last_question else "Continue"
+        
+        if st.button(button_text, key="continue_after_feedback"):
+            st.session_state.showing_feedback = False
+            st.session_state.feedback_for_question = None
+            
+            if is_last_question:
+                st.session_state.quiz_completed = True
+            else:
+                st.session_state.current_question += 1
+            
+            st.rerun()
 
 def display_results():
     """Display quiz results with radar chart and improvement suggestions"""
@@ -434,6 +541,8 @@ def main():
         display_quiz_selection(available_quizzes)
     elif st.session_state.quiz_completed:
         display_results()
+    elif st.session_state.showing_feedback:
+        display_feedback()
     else:
         display_question()
 
