@@ -112,13 +112,13 @@ class AIHelper:
         
         The student's answer was {status}.
         
-        Provide constructive feedback that:
-        - Confirms if they got it right or wrong
-        - Explains why the correct answer is right
-        - If they got it wrong, briefly explains what they missed
-        - Offers educational insight about the procurement concept
+        Provide constructive feedback that explains the procurement concept without explicitly mentioning option numbers or restating which option they selected. Focus on:
+        - The reasoning behind the best approach for this situation  
+        - Key procurement principles or strategies involved
+        - Why this decision matters in procurement practice
+        - If they got it wrong, what to consider for similar situations
         
-        Keep it encouraging and educational. Be concise but helpful.
+        Keep it encouraging, educational, and focused on the learning. Be concise but insightful.
         """
         
         try:
