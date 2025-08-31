@@ -115,14 +115,19 @@ def display_quiz_selection(available_quizzes):
     # Intro to ProcureIQ
     st.subheader("Intro to ProcureIQ")
     st.write("""
-    Welcome to ProcureIQ, your interactive procurement training platform! Our case-study quizzes help you develop essential buyer competencies through real-world scenarios.
+    Welcome to ProcureIQ, your interactive procurement training platform. Through immersive case-study quizzes, you'll practice making decisions in realistic scenarios and build confidence as a strategic buyer.
     
     **What you'll learn:**
-    - **Check the Facts** - Data verification and analysis skills
-    - **Break Down the Costs** - Cost analysis and financial evaluation  
-    - **Know the Market** - Market research and industry knowledge
-    - **Negotiate for Value** - Strategic negotiation techniques
-    - **Choose the Right Supplier Strategy** - Supplier selection and management
+    
+    **Check the Facts** – Verify data and strengthen your analytical rigor
+    
+    **Break Down the Costs** – Evaluate costs, budgets, and financial trade-offs
+    
+    **Know the Market** – Research markets and anticipate supplier dynamics
+    
+    **Negotiate for Value** – Apply negotiation strategies that create lasting value
+    
+    **Choose the Right Supplier Strategy** – Align supplier choices with business priorities
     
     Each quiz presents 8-12 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
     """)
