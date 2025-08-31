@@ -424,11 +424,10 @@ def main():
         st.write("---")
         st.write("**Need Help?**")
         st.write("Type one of the following:")
-        st.write("")
-        st.write("**Hint** → \"give me a hint\"")
-        st.write("**Clarify** → \"clarify option 2\"")  
-        st.write("**Explain** → \"explain the context\"")
-        st.write("**Show Data** → \"show supporting data\"")
+        st.write("- hint")
+        st.write("- clarify")
+        st.write("- explain") 
+        st.write("- show data")
     
     # Main content
     if not st.session_state.quiz_started:
