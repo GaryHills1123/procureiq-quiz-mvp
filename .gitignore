@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environment variables
 .env
 .env.local
@@ -53,3 +54,20 @@ Thumbs.db
 # Replit specific
 .replit
 uv.lock
+=======
+__pycache__/
+.venv/
+venv/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+.streamlit/secrets.toml
+*.db
+procureiq.db
+node_modules/
+dist/
+build/
+>>>>>>> 10ee80dfd54fc7fcb116471a8a91a0ae3f357be3
