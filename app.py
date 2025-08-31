@@ -124,7 +124,7 @@ def display_quiz_selection(available_quizzes):
     - **Negotiate for Value** - Strategic negotiation techniques
     - **Choose the Right Supplier Strategy** - Supplier selection and management
     
-    Each quiz presents 10 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
+    Each quiz presents 8-12 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
     """)
     
     st.write("Select a case study quiz to begin your procurement training.")
