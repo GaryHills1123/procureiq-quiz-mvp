@@ -363,26 +363,6 @@ def display_feedback():
     else:
         st.error("❌ Incorrect")
     
-    # Show your answer and correct answer
-    with st.expander("Your Answer vs Correct Answer", expanded=True):
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.write("**Your Answer:**")
-            if question['type'] == 'single':
-                st.write(f"• {question['options'][user_answer]}")
-            else:
-                for idx in user_answer:
-                    st.write(f"• {question['options'][idx]}")
-        
-        with col2:
-            st.write("**Correct Answer:**")
-            if question['type'] == 'single':
-                st.write(f"• {question['options'][question['answer_index']]}")
-            else:
-                for idx in question['answer_indices']:
-                    st.write(f"• {question['options'][idx]}")
-    
     # Generate and display AI feedback
     if st.session_state.ai_helper and not st.session_state.ai_helper_error:
         st.subheader("AI Feedback")
