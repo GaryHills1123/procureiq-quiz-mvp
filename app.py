@@ -123,7 +123,6 @@ def display_quiz_selection(available_quizzes):
     - **Know the Market** - Market research and industry knowledge
     - **Negotiate for Value** - Strategic negotiation techniques
     - **Choose the Right Supplier Strategy** - Supplier selection and management
-    - **Learn and Improve** - Continuous improvement and adaptation
     
     Each quiz presents 10 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
     """)
@@ -416,8 +415,7 @@ def main():
             "Break Down the Costs", 
             "Know the Market",
             "Negotiate for Value",
-            "Choose the Right Supplier Strategy",
-            "Learn and Improve"
+            "Choose the Right Supplier Strategy"
         ]
         for comp in competencies:
             st.write(f"• {comp}")

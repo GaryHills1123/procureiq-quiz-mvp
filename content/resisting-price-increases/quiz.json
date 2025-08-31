@@ -13,8 +13,7 @@
     {"key": "costs", "label": "Break Down the Costs"},
     {"key": "market", "label": "Know the Market"},
     {"key": "negotiation", "label": "Negotiate for Value"},
-    {"key": "strategy", "label": "Choose the Right Supplier Strategy"},
-    {"key": "improvement", "label": "Learn and Improve"}
+    {"key": "strategy", "label": "Choose the Right Supplier Strategy"}
   ],
   "data_tables": [
     {
@@ -73,10 +72,6 @@
     "strategy": [
       "Adapt tactics to supplier category (strategic vs leverage).",
       "Benchmark and maintain at least one viable alternative."
-    ],
-    "improvement": [
-      "Document negotiation outcomes and lessons learned.",
-      "Ensure tactics used comply with ethics and policy."
     ]
   },
   "scoring": { "deliver_count": 10, "multi_select_policy": "reject_wrong_count" },
