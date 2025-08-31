@@ -252,38 +252,39 @@ def display_question():
         
         st.session_state.user_answers[question['id']] = answers
     
-    # AI Helper section
-    st.subheader("Need Help?")
-    
-    # Check if AI helper is available
-    if st.session_state.ai_helper_error:
-        st.error(f"AI Help not available: {st.session_state.ai_helper_error}")
-        return
-    
-    if not st.session_state.ai_helper:
-        st.error("AI Helper not initialized. Please refresh the page.")
-        return
-    
-    # Use a form so Enter key submits the help request
-    with st.form(key=f"help_form_{question['id']}"):
-        help_request = st.text_input(
-            "Ask for a hint or clarification:",
-            placeholder="e.g., 'provide a hint', 'clarify option 2', 'explain the context'"
-        )
-        help_submitted = st.form_submit_button("Get Help")
+    # AI Helper section - don't show immediately after feedback transition
+    if not st.session_state.get('showing_feedback', False):
+        st.subheader("Need Help?")
         
-        if help_submitted:
-            if not help_request.strip():
-                st.error("Please enter a question or request for help.")
-            else:
-                with st.spinner("Getting AI assistance..."):
-                    try:
-                        help_response = st.session_state.ai_helper.get_help(question, help_request)
-                        st.success("AI Response:")
-                        st.info(help_response)
-                    except Exception as e:
-                        st.error(f"Error getting AI help: {str(e)}")
-                        st.write("Please try again or contact support if the issue persists.")
+        # Check if AI helper is available
+        if st.session_state.ai_helper_error:
+            st.error(f"AI Help not available: {st.session_state.ai_helper_error}")
+            return
+        
+        if not st.session_state.ai_helper:
+            st.error("AI Helper not initialized. Please refresh the page.")
+            return
+        
+        # Use a form so Enter key submits the help request
+        with st.form(key=f"help_form_{question['id']}"):
+            help_request = st.text_input(
+                "Ask for a hint or clarification:",
+                placeholder="e.g., 'provide a hint', 'clarify option 2', 'explain the context'"
+            )
+            help_submitted = st.form_submit_button("Get Help")
+            
+            if help_submitted:
+                if not help_request.strip():
+                    st.error("Please enter a question or request for help.")
+                else:
+                    with st.spinner("Getting AI assistance..."):
+                        try:
+                            help_response = st.session_state.ai_helper.get_help(question, help_request)
+                            st.success("AI Response:")
+                            st.info(help_response)
+                        except Exception as e:
+                            st.error(f"Error getting AI help: {str(e)}")
+                            st.write("Please try again or contact support if the issue persists.")
     
     # Navigation buttons - always visible for consistency
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -393,6 +394,10 @@ def display_feedback():
         if st.button(button_text, key="continue_after_feedback"):
             st.session_state.showing_feedback = False
             st.session_state.feedback_for_question = None
+            
+            # Clear any form states to prevent UI flashing
+            if f"help_form_{st.session_state.current_question}" in st.session_state:
+                del st.session_state[f"help_form_{st.session_state.current_question}"]
             
             if is_last_question:
                 st.session_state.quiz_completed = True
