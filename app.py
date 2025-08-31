@@ -414,16 +414,12 @@ def main():
                 st.rerun()
         
         st.write("---")
-        st.write("**Core Competencies:**")
-        competencies = [
-            "Check the Facts",
-            "Break Down the Costs", 
-            "Know the Market",
-            "Negotiate for Value",
-            "Choose the Right Supplier Strategy"
-        ]
-        for comp in competencies:
-            st.write(f"• {comp}")
+        st.write("**Core Competencies**")
+        st.write("✅ Check the Facts")
+        st.write("✅ Break Down the Costs")
+        st.write("✅ Know the Market")
+        st.write("✅ Negotiate for Value")
+        st.write("✅ Choose the Right Supplier Strategy")
     
     # Main content
     if not st.session_state.quiz_started:
