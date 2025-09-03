@@ -1,6 +1,7 @@
 {
+  "version": 1,
   "slug": "sustainability-mandate",
-  "title": "Sustainability Mandate Challenge",
+  "title": "Case Study: Sustainability Mandate Challenge",
   "scenario": "TechFlow Solutions, a mid-sized technology company, has just announced an ambitious sustainability goal: achieve 60% sustainable suppliers across all procurement categories within 18 months. This mandate comes from new board-level ESG commitments and regulatory compliance requirements (EU CSRD). As the procurement manager, you currently have only 25% sustainable suppliers and face budget constraints, tight timelines, and varying supplier capabilities. Your decisions will determine whether TechFlow meets its sustainability targets while maintaining operational efficiency and cost competitiveness.",
   "learning_objectives": [
     "Develop strategies for supplier sustainability assessment and transition planning",
@@ -9,6 +10,16 @@
     "Navigate stakeholder expectations and compliance requirements in sustainable sourcing",
     "Create implementation timelines that balance risk and sustainability goals"
   ],
+  "skills_catalog": [
+    {"key": "analysis", "label": "Check the Facts"},
+    {"key": "costs", "label": "Break Down the Costs"},
+    {"key": "market", "label": "Know the Market"},
+    {"key": "negotiation", "label": "Negotiate for Value"},
+    {"key": "strategy", "label": "Choose the Right Supplier Strategy"}
+  ],
+  "scoring": {
+    "deliver_count": 10
+  },
   "data_tables": [
     {
       "title": "Current Supplier Sustainability Assessment",
@@ -52,60 +63,6 @@
       ]
     }
   ],
-  "skills_catalog": [
-    {
-      "id": "check_facts",
-      "name": "Check the Facts",
-      "description": "Verify sustainability claims, assess certification validity, and analyze ESG data accuracy"
-    },
-    {
-      "id": "break_costs", 
-      "name": "Break Down the Costs",
-      "description": "Calculate total cost of ownership including sustainability premiums, compliance costs, and long-term value"
-    },
-    {
-      "id": "know_market",
-      "name": "Know the Market", 
-      "description": "Research sustainable supplier options, understand certification landscapes, and assess market readiness"
-    },
-    {
-      "id": "negotiate_value",
-      "name": "Negotiate for Value",
-      "description": "Structure contracts that incentivize sustainability improvements while managing cost impacts"
-    },
-    {
-      "id": "supplier_strategy",
-      "name": "Choose the Right Supplier Strategy",
-      "description": "Develop phased transition plans that balance sustainability goals with operational requirements"
-    }
-  ],
-  "improvement_rubric": {
-    "check_facts": [
-      "Practice validating sustainability certifications and ESG scoring methodologies",
-      "Learn to identify greenwashing vs. authentic sustainability practices",
-      "Develop skills in third-party verification and audit interpretation"
-    ],
-    "break_costs": [
-      "Master total cost of ownership calculations including sustainability premiums",
-      "Learn to quantify risk mitigation value and long-term savings from sustainable sourcing",
-      "Practice building business cases that justify sustainability investments"
-    ],
-    "know_market": [
-      "Research emerging sustainable suppliers and certification programs",
-      "Stay current on regulatory requirements and industry sustainability standards",
-      "Develop market intelligence on sustainable sourcing options"
-    ],
-    "negotiate_value": [
-      "Learn to structure sustainability performance incentives in contracts",
-      "Practice collaborative approaches to help suppliers improve sustainability practices",
-      "Develop skills in balancing cost and sustainability requirements"
-    ],
-    "supplier_strategy": [
-      "Master phased implementation planning for sustainability transitions",
-      "Learn to balance multiple supplier relationships during sustainability transformations",
-      "Practice risk management strategies for sustainable supplier transitions"
-    ]
-  },
   "questions": [
     {
       "id": "q1",
@@ -118,14 +75,8 @@
         "Logistics - highest implementation complexity requiring early start"
       ],
       "answer_index": 2,
-      "explanation": "Packaging offers the best combination of quick wins: lowest cost premium (+5%), shortest implementation time (3 months), and low risk. This creates early momentum for the sustainability program while allowing time to tackle more complex categories.",
-      "competency": "supplier_strategy",
-      "delivery_count": 10,
-      "hints": [
-        "Consider which option provides the fastest path to demonstrable progress",
-        "Look at the implementation timeline and risk level data",
-        "Think about building momentum for the overall sustainability program"
-      ]
+      "explain": "Packaging offers the best combination of quick wins: lowest cost premium (+5%), shortest implementation time (3 months), and low risk. This creates early momentum for the sustainability program while allowing time to tackle more complex categories.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
     },
     {
       "id": "q2", 
@@ -138,14 +89,8 @@
         "Immediately terminate the relationship and source from certified suppliers only"
       ],
       "answer_index": 2,
-      "explanation": "Third-party verification through platforms like EcoVadis provides objective, standardized assessment based on GRI, UN Global Compact, and ISO 26000 standards. This protects against greenwashing while giving suppliers a clear pathway to demonstrate legitimate sustainability practices.",
-      "competency": "check_facts",
-      "delivery_count": 10,
-      "hints": [
-        "Consider the risk of greenwashing in unverified sustainability claims",
-        "Think about industry-standard verification methods",
-        "Balance verification needs with supplier relationship management"
-      ]
+      "explain": "Third-party verification through platforms like EcoVadis provides objective, standardized assessment based on GRI, UN Global Compact, and ISO 26000 standards. This protects against greenwashing while giving suppliers a clear pathway to demonstrate legitimate sustainability practices.",
+      "skills": [{"key": "analysis", "weight": 1.0}]
     },
     {
       "id": "q3",
@@ -159,14 +104,8 @@
       ],
       "answer_indices": [0, 2],
       "select_count": 2,
-      "explanation": "Regulatory compliance addresses mandatory CSRD requirements and avoids substantial fines. Total cost reduction through efficiency gains provides concrete ROI that justifies initial premiums through operational improvements and waste reduction.",
-      "competency": "break_costs",
-      "delivery_count": 10,
-      "hints": [
-        "Focus on quantifiable business benefits rather than market trends",
-        "Consider both risk mitigation and operational efficiency arguments",
-        "Think about long-term financial impact beyond initial premium costs"
-      ]
+      "explain": "Regulatory compliance addresses mandatory CSRD requirements and avoids substantial fines. Total cost reduction through efficiency gains provides concrete ROI that justifies initial premiums through operational improvements and waste reduction.",
+      "skills": [{"key": "costs", "weight": 1.0}]
     },
     {
       "id": "q4",
@@ -179,14 +118,8 @@
         "Propose a cost-sharing arrangement for their sustainability certification process"
       ],
       "answer_index": 3,
-      "explanation": "Cost-sharing for certification creates a collaborative partnership that reduces their financial barrier while ensuring your sustainability requirements are met. This approach maintains relationships while accelerating supplier sustainability development.",
-      "competency": "negotiate_value",
-      "delivery_count": 10,
-      "hints": [
-        "Consider collaborative approaches that address supplier concerns",
-        "Think about removing barriers to sustainability adoption",
-        "Balance firm requirements with supportive partnership strategies"
-      ]
+      "explain": "Cost-sharing for certification creates a collaborative partnership that reduces their financial barrier while ensuring your sustainability requirements are met. This approach maintains relationships while accelerating supplier sustainability development.",
+      "skills": [{"key": "negotiation", "weight": 1.0}]
     },
     {
       "id": "q5",
@@ -199,14 +132,8 @@
         "Lack of standardized sustainability measurement frameworks"
       ],
       "answer_index": 2,
-      "explanation": "Implementation complexity requiring 18-36 months directly conflicts with your 18-month mandate. This timeline pressure means you need to prioritize quick wins and parallel implementation tracks rather than sequential transitions.",
-      "competency": "know_market",
-      "delivery_count": 9,
-      "hints": [
-        "Compare the implementation timeline data with your mandate deadline",
-        "Consider which challenge most directly impacts your ability to meet targets",
-        "Think about what factors could derail your project timeline"
-      ]
+      "explain": "Implementation complexity requiring 18-36 months directly conflicts with your 18-month mandate. This timeline pressure means you need to prioritize quick wins and parallel implementation tracks rather than sequential transitions.",
+      "skills": [{"key": "market", "weight": 1.0}]
     },
     {
       "id": "q6",
@@ -220,14 +147,8 @@
       ],
       "answer_indices": [0, 3],
       "select_count": 2,
-      "explanation": "ISO 20400 provides comprehensive sustainable procurement guidelines aligned with UN SDGs, while EcoVadis offers standardized supplier assessment covering 150,000+ companies globally with proven methodologies.",
-      "competency": "check_facts",
-      "delivery_count": 9,
-      "hints": [
-        "Focus on certifications specifically designed for procurement and supply chain",
-        "Consider which certifications provide standardized, comparable metrics",
-        "Think about certifications that align with your specific needs"
-      ]
+      "explain": "ISO 20400 provides comprehensive sustainable procurement guidelines aligned with UN SDGs, while EcoVadis offers standardized supplier assessment covering 150,000+ companies globally with proven methodologies.",
+      "skills": [{"key": "analysis", "weight": 1.0}]
     },
     {
       "id": "q7",
@@ -240,14 +161,8 @@
         "Outsource logistics decision-making to a sustainability consulting firm"
       ],
       "answer_index": 2,
-      "explanation": "Splitting spend provides risk mitigation while enabling gradual transition. This parallel supplier strategy ensures supply chain continuity while building experience with sustainable logistics partners before full commitment.",
-      "competency": "supplier_strategy", 
-      "delivery_count": 9,
-      "hints": [
-        "Consider risk mitigation strategies that don't sacrifice sustainability progress",
-        "Think about gradual transition approaches for high-risk categories",
-        "Balance operational continuity with sustainability advancement"
-      ]
+      "explain": "Splitting spend provides risk mitigation while enabling gradual transition. This parallel supplier strategy ensures supply chain continuity while building experience with sustainable logistics partners before full commitment.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
     },
     {
       "id": "q8",
@@ -260,14 +175,8 @@
         "Request a timeline extension since 35% in 6 months is unrealistic"
       ],
       "answer_index": 1,
-      "explanation": "Transitioning packaging (+5 categories) and office services (low risk, short implementation) can quickly achieve ~25% of the 35% target while building program momentum and expertise for tackling harder categories.",
-      "competency": "supplier_strategy",
-      "delivery_count": 9,
-      "hints": [
-        "Look at which categories can be completed quickly to build toward the 35% target",
-        "Consider implementation timelines and risk levels from the data tables",
-        "Think about creating early wins to demonstrate program success"
-      ]
+      "explain": "Transitioning packaging (+5 categories) and office services (low risk, short implementation) can quickly achieve ~25% of the 35% target while building program momentum and expertise for tackling harder categories.",
+      "skills": [{"key": "strategy", "weight": 1.0}]
     },
     {
       "id": "q9",
@@ -280,14 +189,8 @@
         "Request they match CloudGreen's current sustainability score of 75/100"
       ],
       "answer_index": 1,
-      "explanation": "Verification with measurable milestones and third-party certification ensures legitimate improvement rather than 'sustainability theater.' This approach maintains supplier relationships while ensuring authentic progress toward your goals.",
-      "competency": "check_facts",
-      "delivery_count": 8,
-      "hints": [
-        "Consider how to verify that promised improvements are legitimate",
-        "Think about the importance of measurable and auditable progress",
-        "Balance cost savings with sustainability authenticity"
-      ]
+      "explain": "Verification with measurable milestones and third-party certification ensures legitimate improvement rather than 'sustainability theater.' This approach maintains supplier relationships while ensuring authentic progress toward your goals.",
+      "skills": [{"key": "analysis", "weight": 1.0}]
     },
     {
       "id": "q10",
@@ -301,54 +204,8 @@
       ],
       "answer_indices": [1, 2],
       "select_count": 2,
-      "explanation": "Front-loaded implementation costs with delayed savings require careful cash flow planning. Quantifying risk mitigation value (regulatory compliance, reputational protection) provides additional ROI justification beyond operational savings.",
-      "competency": "break_costs",
-      "delivery_count": 8,
-      "hints": [
-        "Consider the timing of costs versus benefits in your planning",
-        "Think about both direct costs and risk-related value",
-        "Focus on factors you can control and quantify"
-      ]
-    },
-    {
-      "id": "q11",
-      "type": "single",
-      "stem": "Your CEO wants to announce the sustainability program publicly. Given your current 25% status, what communication strategy should you recommend?",
-      "options": [
-        "Announce the 60% goal with full timeline details to demonstrate transparency",
-        "Focus on current achievements and partnerships with sustainable suppliers",
-        "Wait until achieving 35% sustainable spend before any public communication",
-        "Highlight the sustainability program launch while emphasizing it's a journey"
-      ],
-      "answer_index": 3,
-      "explanation": "Emphasizing the journey approach manages stakeholder expectations while demonstrating commitment. This authentic positioning avoids over-promising while building credibility through transparent progress updates.",
-      "competency": "negotiate_value",
-      "delivery_count": 8,
-      "hints": [
-        "Consider how to manage public expectations while showing commitment",
-        "Think about balancing transparency with realistic goal communication",
-        "Focus on sustainable communication strategies that build long-term credibility"
-      ]
-    },
-    {
-      "id": "q12",
-      "type": "single",
-      "stem": "Market research shows 67% of companies faced procurement complications due to geopolitical factors in 2024. How should this influence your sustainability supplier selection?",
-      "options": [
-        "Prioritize local sustainable suppliers to reduce geopolitical risk",
-        "Focus on cost savings over sustainability to maintain financial flexibility",
-        "Diversify sustainable suppliers across multiple regions and backup options",
-        "Delay sustainability implementation until geopolitical stability improves"
-      ],
-      "answer_index": 2,
-      "explanation": "Diversification across regions provides both sustainability advancement and risk mitigation. This strategy addresses geopolitical uncertainty while maintaining progress toward sustainability goals through multiple supplier relationships.",
-      "competency": "know_market",
-      "delivery_count": 8,
-      "hints": [
-        "Consider how to address multiple risks simultaneously",
-        "Think about sustainable supplier strategies that enhance rather than compromise resilience",
-        "Balance immediate goals with long-term risk management"
-      ]
+      "explain": "Front-loaded implementation costs with delayed savings require careful cash flow planning. Quantifying risk mitigation value (regulatory compliance, reputational protection) provides additional ROI justification beyond operational savings.",
+      "skills": [{"key": "costs", "weight": 1.0}]
     }
   ]
 }
