@@ -112,15 +112,15 @@ class AIHelper:
         
         The student's answer was {status}.
         
-        Provide structured feedback without explicitly mentioning option numbers or restating which option they selected:
+        IMPORTANT: Follow this exact structure based on whether the answer was correct or incorrect:
 
-        For CORRECT answers: Write exactly 1 paragraph that explains the reasoning behind the best approach and why this decision matters in procurement practice.
+        If the answer was CORRECT: Write exactly ONE paragraph (3-4 sentences) that explains the reasoning behind their choice and why this decision matters in procurement practice.
 
-        For INCORRECT answers: Write exactly 2 paragraphs:
-        - Paragraph 1: Explain what the best approach should be and the key procurement principles involved
-        - Paragraph 2: Provide foundational understanding of why this matters and what to consider for similar situations in procurement practice
+        If the answer was INCORRECT: Write exactly TWO separate paragraphs:
+        - First paragraph: Explain what the best approach should be and the key procurement principles involved
+        - Second paragraph: Provide foundational understanding of why this matters and what to consider for similar situations
 
-        Keep it encouraging, educational, and focused on building procurement expertise.
+        Do not exceed the specified paragraph count. Keep it encouraging, educational, and focused on building procurement expertise.
         """
         
         try:
