@@ -366,7 +366,7 @@ def display_feedback():
     
     # Generate and display AI feedback
     if st.session_state.ai_helper and not st.session_state.ai_helper_error:
-        st.subheader("AI Feedback")
+        st.subheader("Feedback")
         with st.spinner("Generating personalized feedback..."):
             try:
                 feedback = st.session_state.ai_helper.get_answer_feedback(question, user_answer)
