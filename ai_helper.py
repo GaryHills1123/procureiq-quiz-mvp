@@ -112,13 +112,15 @@ class AIHelper:
         
         The student's answer was {status}.
         
-        Provide constructive feedback that explains the procurement concept without explicitly mentioning option numbers or restating which option they selected. Focus on:
-        - The reasoning behind the best approach for this situation  
-        - Key procurement principles or strategies involved
-        - Why this decision matters in procurement practice
-        - If they got it wrong, what to consider for similar situations
-        
-        Keep it encouraging, educational, and focused on the learning. Be concise but insightful.
+        Provide structured feedback without explicitly mentioning option numbers or restating which option they selected:
+
+        For CORRECT answers: Write exactly 1 paragraph that explains the reasoning behind the best approach and why this decision matters in procurement practice.
+
+        For INCORRECT answers: Write exactly 2 paragraphs:
+        - Paragraph 1: Explain what the best approach should be and the key procurement principles involved
+        - Paragraph 2: Provide foundational understanding of why this matters and what to consider for similar situations in procurement practice
+
+        Keep it encouraging, educational, and focused on building procurement expertise.
         """
         
         try:
