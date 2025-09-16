@@ -156,7 +156,7 @@ def display_quiz_selection(available_quizzes):
         selected_slug = quiz_options[selected_title]
         quiz_data = available_quizzes[selected_slug]['data']
         
-        if st.button("Start Quiz", type="primary"):
+        if st.button("Start Simulation", type="primary"):
             st.session_state.selected_quiz = selected_slug
             st.session_state.quiz_engine = QuizEngine(quiz_data)
             # Reset only the quiz progress, not the started state
