@@ -121,7 +121,7 @@ def display_quiz_selection(available_quizzes):
     # Intro to ProcureIQ
     st.subheader("Intro to ProcureIQ")
     st.write("""
-    Welcome to ProcureIQ, your interactive procurement training platform. Through immersive case-study quizzes, you'll practice making decisions in realistic scenarios and build confidence as a strategic buyer.
+    Welcome to ProcureIQ, your interactive procurement training platform. Through immersive case-study simulations, you'll practice making decisions in realistic scenarios and build confidence as a strategic buyer.
     
     **What you'll learn:**
     
@@ -135,10 +135,10 @@ def display_quiz_selection(available_quizzes):
     
     **Choose the Right Supplier Strategy** – Align supplier choices with business priorities
     
-    Each quiz presents 8-12 questions that test your procurement decision-making. On quiz completion, you'll receive a competency assessment with feedback and improvement suggestions.
+    Each simulation presents 8-12 questions that test your procurement decision-making. On simulation completion, you'll receive a competency assessment with feedback and improvement suggestions.
     """)
     
-    st.write("Select a case study quiz to begin your procurement training.")
+    st.write("Select a case study simulation to begin your procurement training.")
     
     if not available_quizzes:
         st.error("No quiz files found. Please ensure quiz data is available in the content directory.")
